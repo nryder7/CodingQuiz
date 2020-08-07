@@ -4,7 +4,6 @@ var timer = document.querySelector("#timer");
 var questForm = document.querySelector("#questForm");
 var secondsLeft = 30;
 /*
-
 var correctAnswers = "?";
 */
 //var questionsArrOfObjIndex = 0;
@@ -62,6 +61,4 @@ startButton.addEventListener("click", begin)
     setTime (); 
   }
  
-
-
 
