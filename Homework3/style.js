@@ -10,19 +10,14 @@ var userInitials = "";
 var highScores = [];
 
 function highScoresLocal() {
-  localStorage.setItem("highscore"+ secondsLeft, userInitials);
+  var localCheck = localStorage.getItem("highscore" + secondsLeft);
+  if (localCheck != null) {
+    localStorage.setItem("highscore" + secondsLeft, localCheck + "/" + userInitials);
+  }
+  else {
+    localStorage.setItem("highscore" + secondsLeft, userInitials);
+  }
 }
-
-// function highScoresLocal() {
-//     var scoresItem =  localStorage.getItem("CodeQuizScores");
-//     if (scoresItem != null) {
-//     highScores.push(scoresItem);
-//     // console.log(highScores);
-//     }
-//     else {
-//       localStorage.setItem(JSON.stringify(secondsLeft), JSON.stringify(userInitials));
-//     }
-//   }
 
 var questionsIndex = [
   {
@@ -79,7 +74,7 @@ function setTime() {
     if (secondsLeft <= 0) {
       clearInterval(timerInterval);
       displayQuestionForm.setAttribute("style", "display:none");
-      // window.location.href = "highscore.html";
+      window.location.href = "highscore.html";
     }
   }, 1000);
 }
@@ -98,6 +93,4 @@ function begin() {
     displayQuestion();
   }
   setTime();
-}
-
-
+};
