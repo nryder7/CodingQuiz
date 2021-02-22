@@ -22,16 +22,16 @@ function highScoresLocal() {
 
 var questionsIndex = [
   {
-    questionArr: ["What is your name?", "Mark", "Nick", "Tom", "Mike"],
-    correctAnswer: [2],
-  },
-  {
-    questionArr: ["How old?", "12", "22", "32", "42"],
+    questionArr: ["14 * 4 ?", "32", "48", "56", "62"],
     correctAnswer: [3],
   },
   {
-    questionArr: ["Favorite food?", "Pizza", "Burger", "Fries", "Cookies"],
-    correctAnswer: [1],
+    questionArr: ["72 / 6 ?", "8", "9", "12", "14"],
+    correctAnswer: [3],
+  },
+  {
+    questionArr: ["16 * 3 - 4 ?", "42", "44", "46", "48"],
+    correctAnswer: [2],
   }
 ]
 
