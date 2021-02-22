@@ -1,10 +1,28 @@
 var startButton = document.querySelector("#start");
 var displayQuestionForm = document.querySelector("#questionForm");
+// var listItems = document.querySelector("#listItems");
 var timer = document.querySelector("#timer");
 var questForm = document.querySelector("#questForm");
 var secondsLeft = 30;
 var j = 0;
 var correctAnswers = 0;
+var userInitials = "";
+var highScores = [];
+
+function highScoresLocal() {
+  localStorage.setItem("highscore"+ secondsLeft, userInitials);
+}
+
+// function highScoresLocal() {
+//     var scoresItem =  localStorage.getItem("CodeQuizScores");
+//     if (scoresItem != null) {
+//     highScores.push(scoresItem);
+//     // console.log(highScores);
+//     }
+//     else {
+//       localStorage.setItem(JSON.stringify(secondsLeft), JSON.stringify(userInitials));
+//     }
+//   }
 
 var questionsIndex = [
   {
@@ -30,6 +48,7 @@ function displayQuestion() {
   }
   else {
     alert("Your Final Score is " + secondsLeft + "");
+    initials();
     secondsLeft = 0;
   }
 }
@@ -52,7 +71,6 @@ questForm.addEventListener("click", function () {
   }
 });
 
-
 function setTime() {
   var timerInterval = setInterval(function () {
     secondsLeft--;
@@ -61,10 +79,14 @@ function setTime() {
     if (secondsLeft <= 0) {
       clearInterval(timerInterval);
       displayQuestionForm.setAttribute("style", "display:none");
-      var userInitials = prompt("What are your initials?");
-      window.location.href = "highscore.html";
+      // window.location.href = "highscore.html";
     }
   }, 1000);
+}
+
+function initials() {
+  userInitials = prompt("What are your initials?");
+  highScoresLocal();
 }
 
 startButton.addEventListener("click", begin)
@@ -77,3 +99,5 @@ function begin() {
   }
   setTime();
 }
+
+
