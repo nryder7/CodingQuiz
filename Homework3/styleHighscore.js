@@ -3,7 +3,7 @@ var highScores = [];
 var k = 0;
 
 function highScoresLocal() {
-  for (var m = 30; m > 0; m--) {
+  for (var m = 30; m > -30; m--) {
     var scoresItem =  localStorage.getItem("highscore" + "" + m +"");
     if (scoresItem != null) {
     highScores.push(scoresItem, JSON.stringify(m));

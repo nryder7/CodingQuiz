@@ -8,6 +8,7 @@ var j = 0;
 var correctAnswers = 0;
 var userInitials = "";
 var highScores = [];
+var letters = /^[A-Za-z]+$/;
 
 function highScoresLocal() {
   var localCheck = localStorage.getItem("highscore" + secondsLeft);
@@ -80,8 +81,17 @@ function setTime() {
 }
 
 function initials() {
-  userInitials = prompt("What are your initials?");
-  highScoresLocal();
+  userInitials = prompt("What are your initials?").trim();
+
+  if (userInitials === "") {
+    initials();
+  }
+  else if (userInitials.match(letters)){
+    highScoresLocal();
+  }
+  else {
+    initials();
+  }
 }
 
 startButton.addEventListener("click", begin)
