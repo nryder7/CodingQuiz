@@ -3,6 +3,8 @@ var displayQuestionForm = document.querySelector("#questionForm");
 var timer = document.querySelector("#timer");
 var questForm = document.querySelector("#questForm");
 var secondsLeft = 30;
+var j = 0;
+
 /*
 var correctAnswers = "?";
 */
@@ -12,22 +14,36 @@ var questionsIndex = [
   {
     questionArr: ["What is your name?", "Mark", "Nick", "Tom", "Mike"],
     correctAnswer: [1],
+  },
+  {
+    questionArr: ["How old?", "11", "22", "33", "44"],
+    correctAnswer: [2],
+  },
+  {
+    questionArr: ["Favorite food?", "Pizza", "Burger", "Fries", "Cookies"],
+    correctAnswer: [1],
   }
 ]
 
-/*for (var i = 0; i < questionsIndex.length; i++) {
-  questForm.children[i].textContent = questionsIndex[i].questionArr[i];
-*/
+function displayQuestion() {
+  for (var i = 0; i < questionsIndex[j].questionArr.length; i++) {
+    questForm.children[i].textContent = questionsIndex[j].questionArr[i];   
+  };
+}
 
-questForm.children[0].textContent = questionsIndex[0].questionArr[0];
+
+
+
 
   questForm.addEventListener("click", function() {
     if (event.target.matches("button")) {
     var userInput = parseInt(event.target.value);
     }
    
-    if (userInput == questionsIndex[0].correctAnswer){
+    if (userInput == questionsIndex[j].correctAnswer){
       console.log("yay");
+      j++;
+      displayQuestion();
       }
     else {
       secondsLeft = (secondsLeft - 10);
@@ -41,6 +57,7 @@ startButton.addEventListener("click", begin)
      startButton.setAttribute("style", "display:none");
      displayQuestionForm.setAttribute("style", "display:block");
      timer.textContent = "You have " + secondsLeft + " seconds remaining";
+     displayQuestion();
     
 
       function setTime() {
