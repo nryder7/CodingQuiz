@@ -4,20 +4,16 @@ var timer = document.querySelector("#timer");
 var questForm = document.querySelector("#questForm");
 var secondsLeft = 30;
 var j = 0;
-
-/*
-var correctAnswers = "?";
-*/
-//var questionsArrOfObjIndex = 0;
+var correctAnswers = 0;
 
 var questionsIndex = [
   {
     questionArr: ["What is your name?", "Mark", "Nick", "Tom", "Mike"],
-    correctAnswer: [1],
+    correctAnswer: [2],
   },
   {
-    questionArr: ["How old?", "11", "22", "33", "44"],
-    correctAnswer: [2],
+    questionArr: ["How old?", "12", "22", "32", "42"],
+    correctAnswer: [3],
   },
   {
     questionArr: ["Favorite food?", "Pizza", "Burger", "Fries", "Cookies"],
@@ -26,56 +22,58 @@ var questionsIndex = [
 ]
 
 function displayQuestion() {
-  for (var i = 0; i < questionsIndex[j].questionArr.length; i++) {
-    questForm.children[i].textContent = questionsIndex[j].questionArr[i];   
-  };
+  if (j < questionsIndex.length) {
+    console.log(questionsIndex.length);
+    for (var i = 0; i < questionsIndex[j].questionArr.length; i++) {
+      questForm.children[i].textContent = questionsIndex[j].questionArr[i];
+    };
+  }
+  else {
+    alert("Your Final Score is " + secondsLeft + "");
+    secondsLeft = 0;
+  }
 }
 
-
-
-
-
-  questForm.addEventListener("click", function() {
-    if (event.target.matches("button")) {
+questForm.addEventListener("click", function () {
+  if (event.target.matches("button")) {
     var userInput = parseInt(event.target.value);
-    }
-   
-    if (userInput == questionsIndex[j].correctAnswer){
-      console.log("yay");
-      j++;
-      displayQuestion();
-      }
-    else {
-      secondsLeft = (secondsLeft - 10);
-    }
-  });
+  }
 
+  if (userInput == questionsIndex[j].correctAnswer) {
+    j++;
+    correctAnswers++;
+    displayQuestion();
+  }
+
+  else {
+    j++;
+    secondsLeft = (secondsLeft - 10);
+    displayQuestion();
+  }
+});
+
+
+function setTime() {
+  var timerInterval = setInterval(function () {
+    secondsLeft--;
+    timer.textContent = "You have " + secondsLeft + " seconds remaining";
+
+    if (secondsLeft <= 0) {
+      clearInterval(timerInterval);
+      displayQuestionForm.setAttribute("style", "display:none");
+      var userInitials = prompt("What are your initials?");
+      window.location.href = "highscore.html";
+    }
+  }, 1000);
+}
 
 startButton.addEventListener("click", begin)
- function begin(){
-   if(event.target.matches("button")){
-     startButton.setAttribute("style", "display:none");
-     displayQuestionForm.setAttribute("style", "display:block");
-     timer.textContent = "You have " + secondsLeft + " seconds remaining";
-     displayQuestion();
-    
-
-      function setTime() {
-        var timerInterval = setInterval(function() {
-          secondsLeft--;
-          timer.textContent = "You have " + secondsLeft + " seconds remaining";
-
-          if(secondsLeft <= 0) {
-          clearInterval(timerInterval);
-          displayQuestionForm.setAttribute("style", "display:none");
-          alert("Your Final Score is" + /*correctAnswers*/ "");
-          var userInitials = prompt("What are your initials?");
-          window.location.href = "highscore.html";
-          }
-        }, 1000);
-      }
-    }
-    setTime (); 
+function begin() {
+  if (event.target.matches("button")) {
+    startButton.setAttribute("style", "display:none");
+    displayQuestionForm.setAttribute("style", "display:block");
+    timer.textContent = "You have " + secondsLeft + " seconds remaining";
+    displayQuestion();
   }
- 
-
+  setTime();
+}
